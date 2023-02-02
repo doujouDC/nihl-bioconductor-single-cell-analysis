@@ -1,0 +1,135 @@
+---
+title: "Bbioconductor Single Cell Analysis"
+author: "Doug Joubert"
+date: "`r Sys.Date()`"
+editor: visual
+format: docx
+toc: true
+toc-location: body
+toc-title: Table of Contents
+fig-width: 6
+fig-height: 4
+csl: apa.csl
+bibliography: references.bib
+---
+
+# Introduction
+
+Adapted [from](http://bioconductor.org/books/3.16/OSCA.intro/index.html)
+
+## Description
+
+This site contains the introductory chapters for the [**\"Orchestrating Single-Cell Analysis with Bioconductor\"** book](http://bioconductor.org/books/3.16/OSCA). This describes how to install R and [Bioconductor](https://bioconductor.org/) packages, links out to some resources to learn R, describes how to load datasets into an R session, provides an overview of the `SingleCellExperiment` class, and performs a \"quick start\" demonstration for basic single-cell RNA-seq analyses. It is intended for readers with little-to-no computational background who are just getting started with analyses in R.
+
+## Learning Objectives
+
+Upon completion of this class participants should be able to:
+
+-   Ensure that they are using the correct version of R to reproduce exactly the contents of this lesson
+
+-   Download the example files
+
+-   Describe what the Bioconductor project comprises
+
+-   Describe how the Bioconductor project relates to the CRAN repository
+
+-   List methods for learning how to use Bioconductor packages effectively
+
+-   Describe how to join and communicate with the Bioconductor community
+
+# Configuration
+
+Before taking this class, participants should create a new [RStudio project](https://support.posit.co/hc/en-us/articles/200526207-Using-Projects) and download the lesson files in a sub-directory of that project. It is also recommended that participants take our [Introduction to R and RStudio](https://www.nihlibrary.nih.gov/training/introduction-r-and-rstudio-9) class or our [Introduction to Project Management in RStudio](https://www.nihlibrary.nih.gov/training/introduction-project-management-rstudio) class.
+
+Using an RStudio project sets the working directory to the root directory of that project. As a consequence, code is executed relative to that root directory, often avoiding the need for using absolute file paths to import/export data from/to files.
+
+## Version of R
+
+This lesson was developed and tested with `r R.version.string`.
+
+Take a moment to launch RStudio and verify that you are using R version `4.1.x`, with `x` being any patch version, e.g. `4.1.2`.
+
+```{r}
+R.version.string
+```
+
+This is important because Bioconductor uses the version of R running in the current session to determine the version of Bioconductor packages that can be installed in the R library associated with the current R session. Using a different version of R while following this lesson may lead to unexpected results.
+
+## Download the Data Files
+
+Several sections in this class rely on example files that participants need to download.
+
+Run the code below programmatically create a folder called `raw-data` in the current working directory, and download the lesson files in that folder.
+
+```{r}
+dir.create("raw-data", showWarnings = FALSE)
+download.file(
+    url = "https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/master/data/TrimmomaticAdapters/TruSeq3-PE-2.fa", 
+    destfile = "raw-data/TruSeq3-PE-2.fa"
+)
+download.file(
+    url = "https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/master/data/ActbGtf/actb.gtf", 
+    destfile = "raw-data/actb.gtf"
+)
+download.file(
+    url = "https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/master/data/ActbOrf/actb_orfs.fasta", 
+    destfile = "raw-data/actb_orfs.fasta"
+)
+```
+
+## Assumptions for This Class
+
+|                                               |                                   |
+|----------------------------------------|:-------------------------------|
+| ![](images/Rlogo.png){width="0.5in"}          | You know R                        |
+| ![](images/rmarkdown-icon.png){width="0.5in"} | You know a little bit of markdown |
+
+## Installing Software and Packages
+
+### Software
+
+### Packages
+
+## Loading Our Packages
+
+```{r echo=FALSE}
+
+```
+
+# What is Bioconductor?
+
+## A Brief History of Bioconductor
+
+The Bioconductor project was started in the Fall of 2001, as an initiative for the collaborative creation of extensible software for computational biology and bioinformatics [@gentlemanBioconductorOpenSoftware2004]. From the very start, the stated mission of the project was to develop tools for the statistical analysis and comprehension of large datasets and technological artifacts in rigorously and robustly designed experiments. Beyond statistical analyses, the interpretation of statistical results is supported by packages providing biological context, visualization, and reproducibility.
+
+Over the years, software packages contributed to the Bioconductor project have reflected the evolution and emergence of several high-throughput technologies, from microarrays to single-cell genomics, through many variations of sequencing experiments (e.g., RNA-seq, ChIP-seq, DNA-seq), analyses (e.g., sequence variation, copy number variation, single nucleotide polymorphisms), and data modalities (e.g., flow cytometry, proteomics, microscopy and image analysis).
+
+Crucially, the project has not only released software packages implementing novel statistical tests and methodologies, but also produced a diverse range of packages types granting access to databases of molecular annotations and experimental datasets.
+
+![](images/bioc-timeline.png)
+
+Figure 1: Timeline of major Bioconductor milestones alongside technological advancements.
+
+The Bioconductor project culminates at an annual conference in North America in the summer, while regional conferences offer great opportunities for networking in Europe, Asia, and North America. The project is committed to promote a diverse and inclusive community, including a [Code of Conduct](%22https://bioconductor.github.io/bioc_coc_multilingual/) enforced by a Code of Conduct committee.
+
+# Resources
+
+-   Package [vignettes](https://www.bioconductor.org/help/package-vignettes/) and manuals: each Bioconductor package contains at least one vignette, a document that provides a task-oriented description of package functionality. Vignettes contain executable examples and are intended to be used interactively. You can access the PDF version of a vignette for any installed package from inside R using the `browseVignettes` function.
+
+-   [Workflows](https://www.bioconductor.org/packages/release/workflows/) for learning and use. Workflows vignettes are now available as packages. View all [current workflows](https://www.bioconductor.org/packages/release/BiocViews.html#___Workflow).
+
+-   Several [online books](https://www.bioconductor.org/books/release/) for comprehensive coverage of a particular research field, biological question, or technology.
+
+-   [Course and conference](https://www.bioconductor.org/help/course-materials/) material.
+
+-   [Videos](https://www.youtube.com/user/bioconductor).
+
+-   Community [resources](https://www.bioconductor.org/help/community/) and [tutorials](https://support.bioconductor.org/t/Tutorials/).
+
+*R* / [CRAN](http://cran.r-project.org/) packages and [documentation](http://www.r-project.org/other-docs.html)
+
+# Licenses
+
+Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) Add any licensing information or sources used in the creation of this class.
+
+# References
